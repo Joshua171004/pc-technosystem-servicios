@@ -1,0 +1,28 @@
+{
+  "name": "pc-technosystem-servicios",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "build": "vite build",
+    "dev": "npm run build && wrangler dev",
+    "deploy": "wrangler deploy",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "lucide-react": "1.31.0"
+  },
+  "devDependencies": {
+    "vite": "8.0.13",
+    "typescript": "5.9.3",
+    "wrangler": "4.92.0",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@cloudflare/workers-types": "4.20260515.1"
+  }
+}
