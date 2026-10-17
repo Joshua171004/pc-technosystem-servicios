@@ -34,3 +34,23 @@ No se pudo subir el código al repositorio por la conexión GitHub: devolvió 40
 ## Validación
 
 TypeScript, Vite, empaquetado Worker dry-run, pruebas con SQLite en memoria: ocho sábados, respaldo mensual, programación duplicada, permisos de técnico y cliente, inicio, actividades, fotos requeridas, cierre y publicación sin duplicados, archivos privados y referencia interna excluida del cliente. PDF real generado y renderizado para revisar páginas. Falta la prueba integral en navegador y con los dispositivos y base reales. Las pruebas se ejecutan con node tests/maintenance.test.mjs. El generador de ejemplo de PDF usa datos simulados, no acredita un servicio realizado.
+
+## Actualización por etapas y disponibilidad del técnico
+
+El mantenimiento se divide en cinco etapas: Inicio, Revisión general, Actividades de la visita, Datos del reporte y Revisión y cierre. El botón Siguiente valida resultados, evidencias obligatorias y explicaciones de fallas o actividades no realizadas. La interfaz avisa si hay cambios sin guardar antes de cambiar de etapa. Anterior permite corregir etapas ya recorridas antes del cierre. Los controles también se validan en el servidor.
+
+Las visitas existentes se adaptan al consultar sus listas, usando el número de actividades generales de su plan. No hay que volver a programar ni ejecutar el esquema de la base. Las visitas cerradas conservan sus reportes.
+
+La agenda y el calendario del técnico muestran mantenimientos cuya fecha sea hoy, mañana o anterior, según America/Cancun. Los mantenimientos de fechas posteriores no se devuelven en sus datos ni pueden abrirse por enlace directo. Los trabajos que no sean de tipo Mantenimiento conservan su disponibilidad anterior. El técnico entra por defecto al filtro Pendientes; puede consultar servicios anteriores con Todos. Administración conserva toda la programación. La vista de prueba de técnico del administrador aplica también el filtro visual; no equivale a una cuenta técnica real para verificar permisos.
+
+Una visita de sábado aparece desde las 00:00 del viernes, en Cancún. Esto se basa en días de calendario y no en 24 horas antes de una hora concreta. La agenda se refresca cada minuto si está visible y al regresar a la pestaña. No se han añadido avisos por WhatsApp o notificaciones.
+
+Para aplicar: sube el contenido de la nueva versión del ZIP al mismo repositorio y espera el despliegue Ready. Conserva la base y los planes actuales. Después recarga la página y prueba con la cuenta del técnico. Sigue pendiente la prueba integral en navegador y en dispositivos reales.
+
+## Edición de accesos técnicos
+
+En Accesos aparece una lista de técnicos con búsqueda y el botón Editar acceso. Equipo técnico incluye un acceso directo a esa sección. Se puede editar nombre y correo, crear o restablecer contraseña y suspender/reactivar. Si el acceso ya existe y dejas la contraseña vacía, conserva la actual; no se muestra ni recupera la contraseña anterior. Un acceso nuevo necesita una contraseña de 12 a 128 caracteres para habilitarlo.
+
+Guardar conserva el ID del técnico y sus asignaciones, sincroniza nombre y correo de su cuenta y cierra las sesiones anteriores. Suspender conserva su historial e impide iniciar sesión. Solo el administrador puede gestionar estos cambios. El administrador no se modifica desde la lista de técnicos. Los correos usados por otros técnicos, cuentas o contactos se rechazan. Restablecer la contraseña desde el formulario por correo conserva el estado suspendido: para habilitarlo usa Editar acceso y selecciona Activo.
+
+Validación adicional: node tests/technician-access.test.mjs comprueba permisos, edición de correo y nombre, hash conservado al no cambiar la contraseña, restablecimiento, suspensión, reactivación, revocación de sesiones, colisiones de correo, protección del administrador y origen de la petición.
